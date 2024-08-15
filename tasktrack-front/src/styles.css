@@ -14,6 +14,8 @@ body, html {
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    /* at 50% -50%  */
+    background-image: radial-gradient(150% 150% at 50% 10%,white 10%,rgba(124, 58, 237, .4) 70%);
 }
 
 html, body { height: 100%; }
