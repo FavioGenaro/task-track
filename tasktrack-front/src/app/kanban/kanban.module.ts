@@ -14,6 +14,9 @@ import { KanbanTaskComponent } from './kanban-task/kanban-task.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    KanbanComponent
   ]
 })
 export class KanbanModule { }

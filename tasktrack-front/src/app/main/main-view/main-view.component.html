@@ -1,0 +1,13 @@
+<!-- <p>main-view works!</p> -->
+<app-filter-by-date></app-filter-by-date>
+
+<button (click)="showKanbanView()">
+    Kanban
+</button>
+
+<button (click)="showCalendarView()">
+    Calendario
+</button>
+
+<app-kanban *ngIf="showKanban"></app-kanban>
+<app-calendar *ngIf="showCalendar"></app-calendar>
