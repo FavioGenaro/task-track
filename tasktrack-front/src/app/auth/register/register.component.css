@@ -24,55 +24,70 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  }
-  
-  .logo-head{
+}
+
+.logo-head{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
     color: #7C3AED;
-  }
-  
-  .logo-head img{
+}
+
+.logo-head img{
     width: 10%;
-  }
-  
-  .register-form {
+}
+
+.register-form {
     padding: 3rem 2.5rem;
     border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     background: white;
     border: 1px solid #7C3AED
-  }
-  
+}
+
 h1{
     font-size: 1.5rem;
 }
 
-  h2 {
+h2 {
     text-align: center;
     color: #333;
-  }
-  
-  .form-input {
+}
+.btn-test{
+    margin: 1rem;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #7C3AED;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.btn-test:hover,
+.form-submit:hover{
+    background-color: #4c298a;
+}
+
+.form-input {
     margin-bottom: 10px;
-  }
-  
-  .form-input input {
+}
+
+.form-input input {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-  }
-  .form-input input:focus{
+}
+.form-input input:focus{
     outline: none;
     /* border: none; */
-  }
-  
-  .form-submit {
+}
+
+.form-submit {
     width: 100%;
     padding: 10px;
     border: none;
@@ -81,27 +96,27 @@ h1{
     font-size: 1rem;
     color: white;
     cursor: pointer;
-  }
-  
-  .form-footer {
+}
+
+.form-footer {
     text-align: center;
     margin-top: 10px;
-  }
-  
-  .form-footer a {
+}
+
+.form-footer a {
     color: #7C3AED;
     text-decoration: none;
-  }
-  
-  .input-pass{
+}
+
+.input-pass{
     width: 100%;
     display: flex;
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
-  }
-  
-  .input-pass img{
+}
+
+.input-pass img{
     width: 2rem;
     margin-right: 0.5rem;
     color: red;

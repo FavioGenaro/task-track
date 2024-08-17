@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 import { ModalSuccessComponent } from './modal-success/modal-success.component';
-
+import { AppRoutingModule } from './../app-routing.module';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { ModalSuccessComponent } from './modal-success/modal-success.component';
     ModalSuccessComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ],
   exports:[
     NavbarComponent,

@@ -1,1 +1,23 @@
-<p>navbar works!</p>
+<div class="menu">
+    <div class="logo" routerLink="/main/calendar">
+        <img src="assets/logo.png" alt="Logo">
+        <h1>TaskTrack</h1>
+    </div>
+
+    <div class="user" (click)="toggleMenu()">
+        <img src="assets/user-menu.svg" alt="user">
+    </div>
+
+    <div class="dropdown-menu" *ngIf="isMenuOpen" >
+        <ul>
+            <li class="menu-item" routerLink="/main/edit-profile">
+                <img src="assets/profile-menu.svg" alt="user">
+                <p>Editar Perfil</p>
+            </li>
+            <li class="menu-item" (click)="cerrarSesion()">
+                <img src="assets/logout.svg" alt="user">
+                <p>Cerrar Sesión</p>
+            </li>
+        </ul>
+    </div>
+</div>
