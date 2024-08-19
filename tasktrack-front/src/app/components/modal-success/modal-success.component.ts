@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal-success.component.css']
 })
 export class ModalSuccessComponent {
-
+  isOpen: boolean = false;
+  close() {
+    this.isOpen = false
+  }
 }

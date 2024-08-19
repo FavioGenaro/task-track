@@ -1,1 +1,17 @@
-<p>modal-delete works!</p>
+<div class="modal-container" *ngIf="isOpen">
+    <div class="floating-delete" >
+        <div class="btn-close">
+            <button class="close" (click)="close()">X</button>
+        </div>
+        <img src="assets/delete.webp" alt="delete">
+        <div class="text-content">   
+            <p>Eliminar Tarea</p>
+            <br>
+            <p>¿Está seguro que desea eliminar la tarea <b>1</b>?</p>
+            <!-- <p>¿Está seguro que desea eliminar la tarea <b>{{getTituloTarea()}}</b>?</p> -->
+        </div>
+        
+        <!-- <button class="btdelete" (click)="deleteTask()">Eliminar</button> -->
+        <button class="btdelete">Eliminar</button>
+    </div>
+</div>

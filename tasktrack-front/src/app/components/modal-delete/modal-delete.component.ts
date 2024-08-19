@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal-delete.component.css']
 })
 export class ModalDeleteComponent {
-
+  isOpen: boolean = false;
+  close() {
+    this.isOpen = false;
+  }
 }

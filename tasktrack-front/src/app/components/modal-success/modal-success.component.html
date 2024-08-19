@@ -1,1 +1,11 @@
-<p>modal-success works!</p>
+<div class="modal-container" *ngIf="isOpen">
+    <div class="floating-success" >
+        <div class="btn-close">
+            <button (click)="close()">X</button>
+        </div>
+        <img src="assets\success.webp" alt="succes">
+        <div class="text">
+            <p>Cambios registrados exitosamente</p>
+        </div>
+    </div>
+</div>
