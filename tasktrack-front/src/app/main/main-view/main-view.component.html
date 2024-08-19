@@ -1,13 +1,24 @@
 <!-- <p>main-view works!</p> -->
-<app-filter-by-date></app-filter-by-date>
+<div class="contain">
+    <div class="filter">
+        <app-filter-by-date></app-filter-by-date>
 
-<button (click)="showKanbanView()">
-    Kanban
-</button>
+        <div class="btns-select">
+            <button class="btn-select-view" (click)="showKanbanView()">
+                Kanban
+            </button>
+            
+            <button class="btn-select-view" (click)="showCalendarView()">
+                Calendario
+            </button>
+        </div>
+    </div>
 
-<button (click)="showCalendarView()">
-    Calendario
-</button>
+    <div class="views-container">
+        <app-kanban *ngIf="showKanban"></app-kanban>
+        <app-calendar *ngIf="showCalendar"></app-calendar>
+    </div>
+    
+</div>
 
-<app-kanban *ngIf="showKanban"></app-kanban>
-<app-calendar *ngIf="showCalendar"></app-calendar>
+

@@ -1,1 +1,27 @@
-<p>filter-by-date works!</p>
+<!-- <div class="contain"> -->
+    <!-- Filtro -->
+    <div class="filtro">
+        <div class="filtro-fecha">
+            <h3>Filtro por fecha</h3>
+            <div class="form">
+                <div class="date">
+                    <p>De</p>
+                    <input type="datetime-local" [(ngModel)]="fechaInicio">
+                </div>
+                <div class="date">
+                    <p>a</p>
+                    <input type="datetime-local" [(ngModel)]="fechaFin">
+                </div>
+                <button class="butn filtro-tarea" (click)="filtrarTareas()">Filtrar</button>
+            </div>
+        </div>
+
+        <!-- <div class="crear">
+            <button class="butn crear-tarea" [routerLink]="['/main/creartarea']">+ Crear</button>
+            <div class="select-vista">
+                <button class="select" (click)="mostrarCalendar()" [ngClass]="{'active-select': calendar}">Calendar</button>
+                <button class="select" (click)="mostrarKanban()" [ngClass]="{'active-select': kanban}">Kanban</button>
+            </div>
+        </div> -->
+    </div>
+<!-- </div> -->

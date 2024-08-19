@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterByDateComponent } from './filter-by-date/filter-by-date.component';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -9,7 +9,8 @@ import { FilterByDateComponent } from './filter-by-date/filter-by-date.component
     FilterByDateComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports:[
     FilterByDateComponent
