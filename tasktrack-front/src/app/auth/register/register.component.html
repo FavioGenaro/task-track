@@ -7,7 +7,7 @@
 
     
     <div class="Register">
-        <button class="btn-test" routerLink="/main/calendar">Probar sin Cuenta</button>
+        <!-- <button class="btn-test" routerLink="/main/calendar">Probar sin Cuenta</button> -->
         <div class="logo-head">
             <img src="assets/logo.png" alt="Logo" />
             <h1>Tasktrack</h1>
@@ -67,9 +67,10 @@
             </div>
             </div>
             
-            <button class="form-submit" (click)="registrarUsuario()">
-                REGISTRAR
-            </button>
+            <div class="btns">
+                <button class="form-submit" (click)="registrarUsuario()" >REGISTRAR</button>
+                <button class="form-submit btn-test" routerLink="/main/calendar">INGRESAR SIN CUENTA</button>
+            </div>
             <div class="form-footer">
                 <p>¿Ya tienes una cuenta?<a href="#" routerLink="/login"> Inicia Sesión</a></p>
             </div>

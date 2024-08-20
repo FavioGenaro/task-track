@@ -9,7 +9,7 @@
     </div>
   
     <div class="login">
-      <button class="btn-test" routerLink="/main/calendar">Probar sin Cuenta</button>
+      
       <div class="logo-head">
         <img src="assets/logo.png" alt="Logo" />
         <h1>TaskTrack</h1>
@@ -44,8 +44,10 @@
           </div>
         </div>
         
-        <button class="form-submit" (click)="loginUsuario()" >INGRESAR</button>
-  
+        <div class="btns">
+          <button class="form-submit" (click)="loginUsuario()" >INGRESAR</button>
+          <button class="form-submit btn-test" routerLink="/main/calendar">INGRESAR SIN CUENTA</button>
+        </div>
         <div class="form-footer">
           <!-- <a href="#">Olvidé mi contraseña</a><br> -->
           <p>¿Eres nuevo?<a href="#" [routerLink]="['/register']"> Regístrate</a></p>
