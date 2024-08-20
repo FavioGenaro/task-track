@@ -1,0 +1,15 @@
+.full-calendar{
+    height: 100%;
+}
+/* .fc-toolbar-title{
+    color: white !important;
+}
+.fc .fc-button-primary{
+    background-color: aqua !important;
+} */
+
+@media (min-width: 700px ) {
+    .calendar{
+        height: 40rem;
+    }
+}

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 @NgModule({
@@ -9,7 +9,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     CalendarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FullCalendarModule
   ],
   exports:[
     CalendarComponent

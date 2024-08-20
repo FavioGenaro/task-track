@@ -13,13 +13,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'main', component: MainAppComponent, children:[
-    { path: 'edit-profile', title:"Editar perfil", component: EditProfileComponent },
-    { path: 'calendar', title:"Calendar", component: MainViewComponent },
-    { path: 'edit-task', title:"Editar tarea", component: EditTaskComponent},
-    { path: 'create-task', title:"Crear tarea", component: CreateTaskComponent},
-    { path: '', redirectTo: "/main/calendar", pathMatch: 'full'},
-  ]
-},
+      { path: 'calendar', title:"Calendar", component: MainViewComponent },
+      { path: 'edit-profile', title:"Editar perfil", component: EditProfileComponent },
+      { path: 'edit-task', title:"Editar tarea", component: EditTaskComponent},
+      { path: 'create-task', title:"Crear tarea", component: CreateTaskComponent},
+      { path: '', redirectTo: "/main/calendar", pathMatch: 'full'},
+    ]
+  },
 ];
 
 @NgModule({

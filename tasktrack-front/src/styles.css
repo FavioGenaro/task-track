@@ -18,5 +18,53 @@ body, html {
     background-image: radial-gradient(150% 150% at 50% 10%,white 10%,rgba(124, 58, 237, .4) 70%);
 }
 
-html, body { height: 100%; }
+.app-root { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Estilos del calendario */
+/* botones */
+.fc .fc-button-primary{
+    background-color: #32BDC4;
+    border-color: #32BDC4;
+}
+
+.fc .fc-button-primary:hover{
+    background-color: #349fa6;
+    border-color: #349fa6;
+}
+
+/* .fc .fc-next-button, .fc .fc-prev-button{
+    background-color: rgba(124, 58, 237, 1);
+    border-color: rgba(124, 58, 237, 1);
+}
+.fc .fc-next-button:hover, .fc .fc-prev-button:hover{
+    background-color: rgba(124, 58, 237, .8);
+    border-color: rgba(124, 58, 237, .8);
+} */
+
+/* botones en activados */
+.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active{
+    background-color: #349fa6;
+    border-color: #349fa6;
+}
+/* texto del titulo del mes */
+.fc .fc-toolbar-title{
+    font-size: 1.5rem;
+}
+.fc .fc-toolbar-title:first-letter{
+    text-transform: uppercase;
+}
+
+/* dia en el calendario */
+.fc .fc-daygrid-day.fc-day-today{
+    background-color: rgba(26,115,232,.15);
+}
+
+.fc-col-header-cell-cushion::first-letter{
+    text-transform: uppercase;
+}
+/* eventos */
+.fc-daygrid-event-dot{
+    border-color: rgb(26,115,232);
+}

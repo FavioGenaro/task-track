@@ -30,7 +30,7 @@
 
 .butn{
     padding: 0rem 2rem;
-    background-color: #48D7E0;
+    background-color: rgba(124, 58, 237, 1);
     height: 3rem;
     font-size: 1rem;
     color: white;
@@ -40,7 +40,7 @@
     cursor: pointer;
 }
 .butn:hover{
-    background-color: #47c2ca;
+    background-color: rgba(124, 58, 237, .8);
 }
 
 .crear{
