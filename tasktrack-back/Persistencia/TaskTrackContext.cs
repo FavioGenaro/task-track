@@ -11,16 +11,17 @@ namespace Persistencia
         }
 
         // OnModelCreating es un método sobrescrito que viene desde el padre
-        // protected override void OnModelCreating(ModelBuilder modelBuilder){
-        //     base.OnModelCreating(modelBuilder);
-        //     // Con esto definimos que CursoInstructor tiene una primaryKey compuesta por el id de instructor y curso
-        //     modelBuilder.Entity<CursoInstructor>().HasKey(ci => new {ci.InstructorId, ci.CursoId});
-        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder){
+            base.OnModelCreating(modelBuilder);
+            // TagsTask tiene una primaryKey compuesta
+            modelBuilder.Entity<TagsTask>().HasKey(ci => new {ci.TagId, ci.TaskId});
+        }
 
         // Las clases que creamos en el proyecto dominio las pasamos a Entidades
         // esto envolviendolos en un DbSet
+        public DbSet<Dominio.Entities.Task> Tasks {get;set;}
         public DbSet<Tags> Tags {get;set;}
-        // public DbSet<TagsTask> TagsTask {get;set;}
+        public DbSet<TagsTask> TagsTask {get;set;}
         public DbSet<TaskHistory> TaskHistory{get;set;}
         public DbSet<User> User{get;set;}
         public DbSet<UserPreferences> UserPreferences{get;set;}
