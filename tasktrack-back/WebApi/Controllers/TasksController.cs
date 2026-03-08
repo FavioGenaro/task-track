@@ -31,11 +31,14 @@ public class TasksController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var userId = Guid.Parse(User.FindFirst("sub")!.Value);
+        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
+        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
-        // var result = await _mediator.Send(
-        //     new GetTasksByUserQuery(userId));
 
-        return Ok(); // result
+        var result = await _mediator.Send(
+            new GetTasksByUserQuery(userId));
+
+        // return Ok(); // result
+        return Ok(result);
     }
 }

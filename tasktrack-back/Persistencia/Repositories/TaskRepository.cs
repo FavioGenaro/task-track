@@ -21,11 +21,13 @@ public class TaskRepository : ITaskRepository
                 );
     }
 
-    // public async Task<IReadOnlyList<Dominio.Entities.Task>> GetByUserAsync(Guid userId)
-    // {
-    //     return await _context.Tasks
-    //         .Where(t => t.UserId == userId && !t.IsArchived)
-    //         // .OrderBy(t => t.Position)
-    //         .ToListAsync();
-    // }
+    public async Task<IReadOnlyList<Dominio.Entities.Task>> GetByUserAsync(Guid userId)
+    {
+        return await _context.Tasks
+            .Where(t => t.UserId == userId 
+                // && !t.IsArchived
+            )
+            // .OrderBy(t => t.Position)
+            .ToListAsync();
+    }
 }

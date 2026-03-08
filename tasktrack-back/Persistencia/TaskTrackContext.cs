@@ -14,6 +14,7 @@ namespace Persistencia
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);
             // TagsTask tiene una primaryKey compuesta
+            // configuramos clave compuesta para la tabla intermedia
             modelBuilder.Entity<TagsTask>().HasKey(ci => new {ci.TagId, ci.TaskId});
         }
 
