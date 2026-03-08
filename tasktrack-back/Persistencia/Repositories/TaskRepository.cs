@@ -30,4 +30,23 @@ public class TaskRepository : ITaskRepository
             // .OrderBy(t => t.Position)
             .ToListAsync();
     }
+
+    // eliminar tarea
+    public async Task<int?> DeleteByIdAsync(Guid taskId, Guid userId)
+    {
+        var task = await _context.Tasks
+            .FirstOrDefaultAsync(t =>
+                t.Id == taskId // &&
+                // t.UserId == userId &&
+                // !t.IsArchived
+                );
+        
+        if(task is null) return null;
+        
+        task.IsArchived = true;
+
+        _context.Update(task);
+        
+        return await _context.SaveChangesAsync();
+    }
 }

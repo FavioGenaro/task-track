@@ -9,4 +9,5 @@ public interface ITaskRepository
 
     Task<Entities.Task?> GetByIdAsync(Guid taskId, Guid userId);
     Task<IReadOnlyList<Entities.Task>> GetByUserAsync(Guid userId);
+    Task<int?> DeleteByIdAsync(Guid taskId, Guid userId);
 }
