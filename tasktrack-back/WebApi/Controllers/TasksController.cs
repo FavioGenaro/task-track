@@ -52,7 +52,24 @@ public class TasksController : ControllerBase
         var result = await _mediator.Send(
             new DeleteTaskByIdCommand(id, userId));
 
-        if (result is null)
+        if (result is false)
+        {
+            return NotFound();
+        }
+        
+        return Ok();
+    }
+
+    [HttpPatch("{id:guid}/{status}")]
+    public async Task<IActionResult> ChangeStatus(Guid id, Dominio.Enums.TaskStatus status)
+    {
+        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
+        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+
+        var result = await _mediator.Send(
+            new ChangeStatusByIdCommand(id, userId, status));
+
+        if (result is false)
         {
             return NotFound();
         }
