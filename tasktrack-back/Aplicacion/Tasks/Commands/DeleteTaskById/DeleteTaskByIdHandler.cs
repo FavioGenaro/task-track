@@ -4,7 +4,7 @@ using AutoMapper;
 using Dominio.Interfaces;
 
 public class DeleteTaskByIdHandler
-    : IRequestHandler<DeleteTaskByIdCommand, int?>
+    : IRequestHandler<DeleteTaskByIdCommand, bool>
 {
     private readonly ITaskRepository _repository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ public class DeleteTaskByIdHandler
         _mapper = mapper;
     }
 
-    public async Task<int?> Handle(
+    public async Task<bool> Handle(
         DeleteTaskByIdCommand request,
         CancellationToken cancellationToken)
     {
@@ -26,6 +26,6 @@ public class DeleteTaskByIdHandler
             request.UserId
         );
 
-        return task is null ? null : 1;
+        return task is false ? false : true;
     }
 }

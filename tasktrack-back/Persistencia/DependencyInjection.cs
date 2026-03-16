@@ -23,6 +23,7 @@ public static class DependencyInjection
                 configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<ITaskRepository, TaskRepository>();
+        services.AddScoped<ITaskHistoryRepository, TaskHistoryRepository>();
 
         return services;
     }
