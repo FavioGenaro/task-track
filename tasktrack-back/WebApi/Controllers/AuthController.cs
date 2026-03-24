@@ -31,4 +31,12 @@ public class UserController : ControllerBase
 
         return Ok(id);
     }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginQuery query)
+    {
+        var user = await _mediator.Send(query);
+
+        return Ok(user);
+    }
 }
