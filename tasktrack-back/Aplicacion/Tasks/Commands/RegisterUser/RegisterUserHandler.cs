@@ -5,10 +5,12 @@ public class RegisterUserHandler
     : IRequestHandler<RegisterUserCommand, Guid>
 {
     private readonly IUserRepository _repository;
+    private readonly IUserPreferencesRepository _repositoryUserPreferences;
 
-    public RegisterUserHandler(IUserRepository repository)
+    public RegisterUserHandler(IUserRepository repository, IUserPreferencesRepository repositoryUserPreferences)
     {
         _repository = repository;
+        _repositoryUserPreferences = repositoryUserPreferences;
     }
 
     public async Task<Guid> Handle(
@@ -33,7 +35,29 @@ public class RegisterUserHandler
             UpdatedAt = DateTime.UtcNow
         };
 
+        var userPreferences = new UserPreferences
+        {
+            Id = Guid.NewGuid(),
+            UserId = user.Id,
+            // Theme = UserPreferences.Theme.Light,
+            // NotificationsEnabled = true,
+            CreatedAt = DateTime.UtcNow,
+            // UpdatedAt = DateTime.UtcNow
+        };
+
+        // var userPreferences = new UserPreferences( )
+
+        // {
+        //     Id = Guid.NewGuid(),
+        //     UserId = user.Id,
+        //     // Theme = UserPreferences.Theme.Light,
+        //     // NotificationsEnabled = true,
+        //     CreatedAt = DateTime.UtcNow,
+        //     // UpdatedAt = DateTime.UtcNow
+        // };
+
         await _repository.AddAsync(user);
+        await _repositoryUserPreferences.AddAsync(userPreferences);
 
         return user.Id;
     }
