@@ -9,11 +9,11 @@ using Persistencia;
 
 #nullable disable
 
-namespace WebApi.Migrations
+namespace Persistencia.Migrations
 {
     [DbContext(typeof(TaskTrackContext))]
-    [Migration("20260207224251_AgregarTask")]
-    partial class AgregarTask
+    [Migration("20260328222640_UserPreference")]
+    partial class UserPreference
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,6 +164,9 @@ namespace WebApi.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ThemesEnum")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");

@@ -39,22 +39,9 @@ public class RegisterUserHandler
         {
             Id = Guid.NewGuid(),
             UserId = user.Id,
-            // Theme = UserPreferences.Theme.Light,
-            // NotificationsEnabled = true,
+            ThemesEnum = Dominio.Enums.ThemesEnum.Light,
             CreatedAt = DateTime.UtcNow,
-            // UpdatedAt = DateTime.UtcNow
         };
-
-        // var userPreferences = new UserPreferences( )
-
-        // {
-        //     Id = Guid.NewGuid(),
-        //     UserId = user.Id,
-        //     // Theme = UserPreferences.Theme.Light,
-        //     // NotificationsEnabled = true,
-        //     CreatedAt = DateTime.UtcNow,
-        //     // UpdatedAt = DateTime.UtcNow
-        // };
 
         await _repository.AddAsync(user);
         await _repositoryUserPreferences.AddAsync(userPreferences);
