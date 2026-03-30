@@ -10,4 +10,8 @@ public class User
     public bool isActive { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+
+    // public ICollection<Task> Tasks { get; set; }
+
+    public required UserPreferences UserPreferences { get; set; }
 }

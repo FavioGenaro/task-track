@@ -15,5 +15,11 @@ namespace Dominio.Entities
         public DateTime UpdatedAt { get; set; }
 
         public Guid UserId { get; set; }
+
+        // public User User { get; set; }
+
+        // public ICollection<TaskHistory> History { get; set; }
+
+        // public ICollection<TagsTask> Tags { get; set; }
     }
 }

@@ -29,6 +29,9 @@ public class LoginHandler
             BCrypt.Net.BCrypt.Verify(
                 request.Password,
                 user.PasswordHash);
+        
+        Console.WriteLine($"UserPreference ID: {user.UserPreferences.Id}");
+        Console.WriteLine($"UserPreference Theme: {user.UserPreferences.ThemesEnum}");
 
         if (!valid)
             throw new Exception("Invalid credentials");

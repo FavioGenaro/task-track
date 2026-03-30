@@ -23,28 +23,31 @@ public class RegisterUserHandler
         if (existing != null)
             throw new Exception("Email already registered");
 
-        var user = new User
+        var userId = Guid.NewGuid();
+
+        var userPreferences = new UserPreferences
         {
             Id = Guid.NewGuid(),
+            UserId = userId,
+            ThemesEnum = Dominio.Enums.ThemesEnum.Light,
+            CreatedAt = DateTime.UtcNow,
+        };
+
+        var user = new User
+        {
+            Id = userId,
             Email = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
             FullName = request.FullName,
             AvatarUrl = "",
             isActive = true,
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
-        };
-
-        var userPreferences = new UserPreferences
-        {
-            Id = Guid.NewGuid(),
-            UserId = user.Id,
-            ThemesEnum = Dominio.Enums.ThemesEnum.Light,
-            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            UserPreferences = userPreferences
         };
 
         await _repository.AddAsync(user);
-        await _repositoryUserPreferences.AddAsync(userPreferences);
+        // await _repositoryUserPreferences.AddAsync(userPreferences);
 
         return user.Id;
     }
