@@ -28,7 +28,6 @@ namespace Persistencia
                 .WithMany()
                 .HasForeignKey(tt => tt.TagId);
 
-
             modelBuilder.Entity<Dominio.Entities.Task>()
                 .HasOne<User>() // Task tiene un User
                 .WithMany() // User tiene muchas Tasks
@@ -50,8 +49,6 @@ namespace Persistencia
                 .HasIndex(u => u.Email)
                 .IsUnique();
         }
-
-        
 
         // Las clases que creamos en el proyecto dominio las pasamos a Entidades
         // esto envolviendolos en un DbSet

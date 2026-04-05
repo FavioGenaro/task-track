@@ -1,4 +1,5 @@
 using Aplicacion.DTOs.User;
+using Aplicacion.DTOs.UserPreferences;
 using AutoMapper;
 using MediatR;
 
@@ -29,9 +30,6 @@ public class LoginHandler
             BCrypt.Net.BCrypt.Verify(
                 request.Password,
                 user.PasswordHash);
-        
-        Console.WriteLine($"UserPreference ID: {user.UserPreferences.Id}");
-        Console.WriteLine($"UserPreference Theme: {user.UserPreferences.ThemesEnum}");
 
         if (!valid)
             throw new Exception("Invalid credentials");
@@ -41,7 +39,11 @@ public class LoginHandler
             Email = user.Email,
             FullName = user.FullName,
             AvatarUrl = user.AvatarUrl,
-            isActive = user.isActive
+            isActive = user.isActive,
+            UserPreferences = new UserPreferenceDto
+            {
+                ThemesEnum = user.UserPreferences.ThemesEnum
+            }
         };
 
         return userDto;

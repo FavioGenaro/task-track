@@ -1,3 +1,4 @@
+using Aplicacion.DTOs.ChangeStatus;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -60,14 +61,14 @@ public class TasksController : ControllerBase
         return Ok();
     }
 
-    [HttpPatch("{id:guid}/{status}")]
-    public async Task<IActionResult> ChangeStatus(Guid id, Dominio.Enums.TaskStatus status)
+    [HttpPatch("{id:guid}", Name ="ChangeStatus")]
+    public async Task<IActionResult> ChangeStatus(Guid id, ChangeStatusDto status)
     {
         // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
         var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
         var result = await _mediator.Send(
-            new ChangeStatusByIdCommand(id, userId, status));
+            new ChangeStatusByIdCommand(id, userId, status.TaskStatus));
 
         if (result is false)
         {
