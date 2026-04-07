@@ -34,17 +34,19 @@ public class LoginHandler
         if (!valid)
             throw new Exception("Invalid credentials");
 
-        var userDto = new UserDto
-        {
-            Email = user.Email,
-            FullName = user.FullName,
-            AvatarUrl = user.AvatarUrl,
-            isActive = user.isActive,
-            UserPreferences = new UserPreferenceDto
-            {
-                ThemesEnum = user.UserPreferences.ThemesEnum
-            }
-        };
+        // var userDto = new UserDto
+        // {
+        //     Email = user.Email,
+        //     FullName = user.FullName,
+        //     AvatarUrl = user.AvatarUrl,
+        //     isActive = user.isActive,
+        //     UserPreferences = new UserPreferenceDto
+        //     {
+        //         ThemesEnum = user.UserPreferences.ThemesEnum
+        //     }
+        // };
+
+        var userDto = _mapper.Map<UserDto>(user);
 
         return userDto;
     }

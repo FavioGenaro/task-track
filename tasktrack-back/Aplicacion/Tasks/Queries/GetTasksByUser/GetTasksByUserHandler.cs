@@ -24,6 +24,7 @@ public class GetTasksByUserHandler
         CancellationToken cancellationToken)
     {
         var tasks = await _repository.GetByUserAsync(request.UserId);
+        
         return _mapper.Map<IReadOnlyList<TaskDto>>(tasks);
     }
 }

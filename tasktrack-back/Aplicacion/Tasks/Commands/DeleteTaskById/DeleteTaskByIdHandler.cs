@@ -7,14 +7,11 @@ public class DeleteTaskByIdHandler
     : IRequestHandler<DeleteTaskByIdCommand, bool>
 {
     private readonly ITaskRepository _repository;
-    private readonly IMapper _mapper;
 
     public DeleteTaskByIdHandler(
-        ITaskRepository repository,
-        IMapper mapper)
+        ITaskRepository repository)
     {
         _repository = repository;
-        _mapper = mapper;
     }
 
     public async Task<bool> Handle(

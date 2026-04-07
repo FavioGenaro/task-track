@@ -27,9 +27,9 @@ public class UserController : ControllerBase
         //     throw ;
         // }
 
-        var id = await _mediator.Send(command);
+        var user = await _mediator.Send(command);
 
-        return Ok(id);
+        return Ok(user);
     }
 
     [HttpPost("login")]

@@ -1,24 +1,26 @@
 using MediatR;
 using AutoMapper;
 using Dominio.Entities;
+using Aplicacion.DTOs.User;
 public class RegisterUserHandler
-    : IRequestHandler<RegisterUserCommand, Guid>
+    : IRequestHandler<RegisterUserCommand, UserDto>
 {
     private readonly IUserRepository _repository;
     private readonly IUserPreferencesRepository _repositoryUserPreferences;
+    private readonly IMapper _mapper;
 
-    public RegisterUserHandler(IUserRepository repository, IUserPreferencesRepository repositoryUserPreferences)
+    public RegisterUserHandler(IUserRepository repository, IUserPreferencesRepository repositoryUserPreferences, IMapper mapper)
     {
         _repository = repository;
         _repositoryUserPreferences = repositoryUserPreferences;
+        _mapper = mapper;
     }
 
-    public async Task<Guid> Handle(
+    public async Task<UserDto> Handle(
         RegisterUserCommand request,
         CancellationToken cancellationToken)
     {
-        var existing =
-            await _repository.GetByEmailAsync(request.Email);
+        var existing = await _repository.GetByEmailAsync(request.Email);
 
         if (existing != null)
             throw new Exception("Email already registered");
@@ -47,8 +49,10 @@ public class RegisterUserHandler
         };
 
         await _repository.AddAsync(user);
-        // await _repositoryUserPreferences.AddAsync(userPreferences);
 
-        return user.Id;
+        var userDto = _mapper.Map<UserDto>(user);
+
+        // return user.Id;
+        return userDto;
     }
 }
