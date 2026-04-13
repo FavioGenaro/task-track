@@ -1,6 +1,5 @@
 using Aplicacion.DTOs.ChangeStatus;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // [Authorize]
@@ -33,11 +32,32 @@ public class TasksController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        var userId = Guid.Parse("9D71DFA7-BA01-43B5-A995-5B2B96A23EF5");
 
 
         var result = await _mediator.Send(
             new GetTasksByUserQuery(userId));
+
+        // return Ok(); // result
+        return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateTask(CreateTaskCommand command)
+    {
+        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
+        // var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        // command.UserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        
+        var result = await _mediator.Send(
+            new CreateTaskCommand(
+                command.Title,
+                command.Description,
+                command.DueDate,
+                command.Status,
+                command.UserId,
+                command.Priority
+            ));
 
         // return Ok(); // result
         return Ok(result);
