@@ -8,4 +8,6 @@ public class TaskDto
     public DateTime? DueDate { get; set; }
     public string Status { get; set; } = null!;
     public string Priority { get; set; } = null!;
+
+    public List<TagsDto> Tags { get; set; } = new List<TagsDto>();
 }

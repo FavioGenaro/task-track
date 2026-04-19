@@ -1,7 +1,6 @@
 using AutoMapper;
 using Dominio.Entities;
-using Aplicacion.DTOs.Tasks;
-using Aplicacion.DTOs.TagsDto;
+using Aplicacion.DTOs;
 
 namespace Aplicacion.Mappings;
 

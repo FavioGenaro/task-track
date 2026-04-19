@@ -20,7 +20,7 @@ public class TasksController : ControllerBase
         // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
         // var userId = new Guid("00000000-0000-0000-0000-000000000001");
 
-        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        var userId = Guid.Parse("98CDE18C-12E3-4724-9322-8544FE482929");
 
         var result = await _mediator.Send(
             new GetTaskByIdQuery(id, userId));
@@ -32,7 +32,7 @@ public class TasksController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        var userId = Guid.Parse("9D71DFA7-BA01-43B5-A995-5B2B96A23EF5");
+        var userId = Guid.Parse("98CDE18C-12E3-4724-9322-8544FE482929");
 
 
         var result = await _mediator.Send(
@@ -49,15 +49,7 @@ public class TasksController : ControllerBase
         // var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
         // command.UserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
         
-        var result = await _mediator.Send(
-            new CreateTaskCommand(
-                command.Title,
-                command.Description,
-                command.DueDate,
-                command.Status,
-                command.UserId,
-                command.Priority
-            ));
+        var result = await _mediator.Send(command);
 
         // return Ok(); // result
         return Ok(result);

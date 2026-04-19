@@ -19,9 +19,6 @@ namespace Dominio.Entities
         // public User User { get; set; }
 
         // public ICollection<TaskHistory> History { get; set; }
-
-        // public ICollection<TagsTask> Tags { get; set; }
-
         public ICollection<TagsTask> Tags { get; set; } = new List<TagsTask>();
     }
 }

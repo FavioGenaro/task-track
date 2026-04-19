@@ -1,6 +1,6 @@
 using MediatR;
 using AutoMapper;
-using Aplicacion.DTOs.TagsDto;
+using Aplicacion.DTOs;
 
 public class CreateTagHandler
     : IRequestHandler<CreateTagCommand, TagsDto>

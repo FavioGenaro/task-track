@@ -1,5 +1,5 @@
 using MediatR;
-using Aplicacion.DTOs.TagsDto;
+using Aplicacion.DTOs;
 
 public record CreateTagCommand(
     string Name,

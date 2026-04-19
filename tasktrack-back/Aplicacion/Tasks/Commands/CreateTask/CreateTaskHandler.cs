@@ -7,12 +7,14 @@ public class CreateTaskHandler
     : IRequestHandler<CreateTaskCommand, TaskDto>
 {
     private readonly ITaskRepository _repository;
+    private readonly ITagsRepository _tagsRepository;
     private readonly IMapper _mapper;
 
-    public CreateTaskHandler(ITaskRepository repository, IMapper mapper)
+    public CreateTaskHandler(ITaskRepository repository, ITagsRepository tagsRepository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
+        _tagsRepository = tagsRepository;
     }
 
     public async Task<TaskDto> Handle(CreateTaskCommand request, CancellationToken cancellationToken)

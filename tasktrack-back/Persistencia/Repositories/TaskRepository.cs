@@ -14,9 +14,11 @@ public class TaskRepository : ITaskRepository
     public async Task<Dominio.Entities.Task?> GetByIdAsync(Guid taskId, Guid userId)
     {
         return await _context.Tasks
+            .Include(t => t.Tags)
+                .ThenInclude(tt => tt.Tag)
             .FirstOrDefaultAsync(t =>
-                t.Id == taskId // &&
-                // t.UserId == userId &&
+                t.Id == taskId &&
+                t.UserId == userId // &&
                 // !t.IsArchived
                 );
     }
@@ -24,6 +26,8 @@ public class TaskRepository : ITaskRepository
     public async Task<IReadOnlyList<Dominio.Entities.Task>> GetByUserAsync(Guid userId)
     {
         return await _context.Tasks
+            .Include(t => t.Tags)
+                .ThenInclude(tt => tt.Tag)
             .Where(t => t.UserId == userId 
                 // && !t.IsArchived
             )

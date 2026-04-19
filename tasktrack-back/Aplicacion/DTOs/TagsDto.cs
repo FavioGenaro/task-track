@@ -1,4 +1,4 @@
-namespace Aplicacion.DTOs.TagsDto;
+namespace Aplicacion.DTOs;
 
 public class TagsDto
 {

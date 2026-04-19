@@ -9,5 +9,6 @@ public record CreateTaskCommand(
     Dominio.Enums.TaskStatus Status,
     // bool IsArchived,
     Guid UserId,
-    Dominio.Enums.TaskPriority Priority
+    Dominio.Enums.TaskPriority Priority,
+    List<Guid> TagIds
 ) : IRequest<TaskDto>;

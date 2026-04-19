@@ -7,4 +7,5 @@ public class Tags
     public required string Color { get; set; }
 
     // public ICollection<TagsTask> Tasks { get; set; }
+    public ICollection<TagsTask> Tasks { get; set; } = new List<TagsTask>();
 }

@@ -19,14 +19,17 @@ namespace Persistencia
                 .HasKey(ci => new {ci.TagId, ci.TaskId});
 
             modelBuilder.Entity<TagsTask>()
-                .HasOne<Dominio.Entities.Task>() // TagsTask tiene un Task
-                .WithMany() // Task tiene muchas TagsTask
+                // .HasOne<Dominio.Entities.Task>() // TagsTask tiene un Task
+                .HasOne(tt => tt.Task)
+                .WithMany(t => t.Tags) // Task tiene muchas TagsTask
                 .HasForeignKey(tt => tt.TaskId);
 
             modelBuilder.Entity<TagsTask>()
-                .HasOne<Tags>()
-                .WithMany()
+                // .HasOne<Tags>()
+                .HasOne(tt => tt.Tag)
+                .WithMany(tag => tag.Tasks)
                 .HasForeignKey(tt => tt.TagId);
+
 
             modelBuilder.Entity<Dominio.Entities.Task>()
                 .HasOne<User>() // Task tiene un User
