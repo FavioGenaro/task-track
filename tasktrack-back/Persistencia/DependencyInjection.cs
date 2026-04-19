@@ -26,6 +26,7 @@ public static class DependencyInjection
         services.AddScoped<ITaskHistoryRepository, TaskHistoryRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserPreferencesRepository, UserPreferencesRepository>();
+        services.AddScoped<ITagsRepository, TagsRepository>();
 
         return services;
     }

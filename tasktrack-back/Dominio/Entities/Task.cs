@@ -20,6 +20,8 @@ namespace Dominio.Entities
 
         // public ICollection<TaskHistory> History { get; set; }
 
-        public ICollection<TagsTask> Tags { get; set; }
+        // public ICollection<TagsTask> Tags { get; set; }
+
+        public ICollection<TagsTask> Tags { get; set; } = new List<TagsTask>();
     }
 }
