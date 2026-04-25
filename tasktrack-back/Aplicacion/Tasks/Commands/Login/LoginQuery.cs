@@ -1,7 +1,7 @@
 using Aplicacion.DTOs.User;
 using MediatR;
 
-public record LoginQuery(
+public record LoginCommand(
     string Email,
     string Password
-) : IRequest<UserDto>;
+) : IRequest<UserResponseDto>;

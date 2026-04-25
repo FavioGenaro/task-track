@@ -3,20 +3,23 @@ using AutoMapper;
 using Dominio.Entities;
 using Aplicacion.DTOs.User;
 public class RegisterUserHandler
-    : IRequestHandler<RegisterUserCommand, UserDto>
+    : IRequestHandler<RegisterUserCommand, UserResponseDto>
 {
     private readonly IUserRepository _repository;
-    private readonly IUserPreferencesRepository _repositoryUserPreferences;
+    private readonly IJwtTokenService _jwtService;
     private readonly IMapper _mapper;
 
-    public RegisterUserHandler(IUserRepository repository, IUserPreferencesRepository repositoryUserPreferences, IMapper mapper)
+    public RegisterUserHandler(IUserRepository repository,
+        IJwtTokenService jwtService,
+        IMapper mapper
+    )
     {
         _repository = repository;
-        _repositoryUserPreferences = repositoryUserPreferences;
+        _jwtService = jwtService;
         _mapper = mapper;
     }
 
-    public async Task<UserDto> Handle(
+    public async Task<UserResponseDto> Handle(
         RegisterUserCommand request,
         CancellationToken cancellationToken)
     {
@@ -51,8 +54,14 @@ public class RegisterUserHandler
         await _repository.AddAsync(user);
 
         var userDto = _mapper.Map<UserDto>(user);
+        var token = _jwtService.GenerateToken(user);
 
-        // return user.Id;
-        return userDto;
+        var loginResponseDto = new UserResponseDto
+        {
+            Token = token,
+            UserDto = userDto
+        };
+
+        return loginResponseDto;
     }
 }

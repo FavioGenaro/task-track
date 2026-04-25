@@ -33,9 +33,9 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginQuery query)
+    public async Task<IActionResult> Login(LoginCommand command)
     {
-        var user = await _mediator.Send(query);
+        var user = await _mediator.Send(command);
 
         return Ok(user);
     }

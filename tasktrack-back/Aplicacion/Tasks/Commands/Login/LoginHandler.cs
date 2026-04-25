@@ -1,24 +1,26 @@
 using Aplicacion.DTOs.User;
-using Aplicacion.DTOs.UserPreferences;
 using AutoMapper;
 using MediatR;
 
 public class LoginHandler
-    : IRequestHandler<LoginQuery, UserDto>
+    : IRequestHandler<LoginCommand, UserResponseDto>
 {
     private readonly IUserRepository _repository;
+    private readonly IJwtTokenService _jwtService;
     private readonly IMapper _mapper;
 
     public LoginHandler(
         IUserRepository repository,
+        IJwtTokenService jwtService,
         IMapper mapper)
     {
         _repository = repository;
+        _jwtService = jwtService;
         _mapper = mapper;
     }
 
-    public async Task<UserDto> Handle(
-        LoginQuery request,
+    public async Task<UserResponseDto> Handle(
+        LoginCommand request,
         CancellationToken cancellationToken)
     {
         var user = await _repository.GetByEmailAsync(request.Email);
@@ -34,20 +36,16 @@ public class LoginHandler
         if (!valid)
             throw new Exception("Invalid credentials");
 
-        // var userDto = new UserDto
-        // {
-        //     Email = user.Email,
-        //     FullName = user.FullName,
-        //     AvatarUrl = user.AvatarUrl,
-        //     isActive = user.isActive,
-        //     UserPreferences = new UserPreferenceDto
-        //     {
-        //         ThemesEnum = user.UserPreferences.ThemesEnum
-        //     }
-        // };
+        var token = _jwtService.GenerateToken(user);
 
         var userDto = _mapper.Map<UserDto>(user);
 
-        return userDto;
+        var loginResponseDto = new UserResponseDto
+        {
+            Token = token,
+            UserDto = userDto
+        };
+
+        return loginResponseDto;
     }
 }
