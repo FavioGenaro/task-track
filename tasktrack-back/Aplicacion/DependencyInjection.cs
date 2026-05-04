@@ -28,11 +28,12 @@ public static class DependencyInjection
         services.AddAutoMapper(
             typeof(DependencyInjection).Assembly);
 
-        
-        services.AddAuthentication();
-
         // agregamos el servicio para generar tokens
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+        // builder.Services.AddHttpContextAccessor(); // accedemos al contexto HTTP desde cualquier clase
+        services.AddHttpContextAccessor(); // accedemos al contexto HTTP desde cualquier clase
+
 
         var jwtSettings = configuration.GetSection("Jwt");
 
@@ -44,20 +45,26 @@ public static class DependencyInjection
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
         .AddJwtBearer(options =>
-        {
+        {  
+            options.MapInboundClaims = false;
+
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
+                ValidateIssuer = false,  // no validamos el origen del token
+                ValidateAudience = false,
+                ValidateLifetime = false, // que no halla expirado
+                ValidateIssuerSigningKey = false, // que valide la llave secreta de la firma
 
                 ValidIssuer = jwtSettings["Issuer"],
                 ValidAudience = jwtSettings["Audience"],
 
+                 // firmamos el token con la lLave
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
+                    Encoding.UTF8.GetBytes(jwtSettings["Key"]!)),
+                    
+                // ClockSkew = TimeSpan.Zero // para no tener problemas con las diferencias temporales al validar los tokens (UTC-0)
             };
+            
         });
 
         services.AddAuthorization();

@@ -1,26 +1,34 @@
+using System.Security.Claims;
 using Aplicacion.DTOs.ChangeStatus;
+using Aplicacion.DTOs.Input;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-// [Authorize]
+[Authorize]
 [ApiController]
 [Route("api/tasks")]
 public class TasksController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ICurrentUserService currentUser; // para acceder al contexto HTTP
 
-    public TasksController(IMediator mediator)
+    public TasksController(IMediator mediator, ICurrentUserService currentUser)
     {
         _mediator = mediator;
+        this.currentUser = currentUser;
     }
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        // var userId = new Guid("00000000-0000-0000-0000-000000000001");
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
 
-        var userId = Guid.Parse("98CDE18C-12E3-4724-9322-8544FE482929");
+        var userId = claimUserId.Value;
 
         var result = await _mediator.Send(
             new GetTaskByIdQuery(id, userId));
@@ -31,35 +39,64 @@ public class TasksController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        var userId = Guid.Parse("98CDE18C-12E3-4724-9322-8544FE482929");
 
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
+
+        var userId = claimUserId.Value;
 
         var result = await _mediator.Send(
             new GetTasksByUserQuery(userId));
 
-        // return Ok(); // result
         return Ok(result);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateTask(CreateTaskCommand command)
+    public async Task<IActionResult> CreateTask(
+        // CreateTaskCommand command}
+        TaskDto taskDto
+    )
     {
-        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        // var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
-        // command.UserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
-        
-        var result = await _mediator.Send(command);
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
 
-        // return Ok(); // result
-        return Ok(result);
+        var userId = claimUserId.Value;
+        
+        var result = await _mediator.Send(
+            new CreateTaskCommand(
+                taskDto.Title,
+                taskDto.Description,
+                taskDto.DueDate,
+                taskDto.Status,
+                taskDto.Priority,
+                taskDto.TagIds,
+                userId
+            )
+        );
+
+        // retornamos la tarea creada
+        var task = await _mediator.Send(
+            new GetTaskByIdQuery(result, userId));
+
+        return task is null ? NotFound() : Ok(task);
     }
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> DeleteById(Guid id)
     {
-        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
+
+        var userId = claimUserId.Value;
 
 
         var result = await _mediator.Send(
@@ -76,8 +113,13 @@ public class TasksController : ControllerBase
     [HttpPatch("{id:guid}", Name ="ChangeStatus")]
     public async Task<IActionResult> ChangeStatus(Guid id, ChangeStatusDto status)
     {
-        // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
+
+        var userId = claimUserId.Value;
 
         var result = await _mediator.Send(
             new ChangeStatusByIdCommand(id, userId, status.TaskStatus));

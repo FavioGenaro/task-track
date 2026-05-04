@@ -4,7 +4,7 @@ using Aplicacion.DTOs.Tasks;
 using Dominio.Interfaces;
 
 public class CreateTaskHandler
-    : IRequestHandler<CreateTaskCommand, TaskDto>
+    : IRequestHandler<CreateTaskCommand, Guid>
 {
     private readonly ITaskRepository _repository;
     private readonly ITagsRepository _tagsRepository;
@@ -17,15 +17,12 @@ public class CreateTaskHandler
         _tagsRepository = tagsRepository;
     }
 
-    public async Task<TaskDto> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
         var task = _mapper.Map<Dominio.Entities.Task>(request);
 
         await _repository.AddAsync(task);
-
-        var taskDto = _mapper.Map<TaskDto>(task);   
-
-        // return user.Id;
-        return taskDto;
+        
+        return task.Id;
     }
 }
