@@ -1,16 +1,20 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-// [Authorize]
+[Authorize]
 [ApiController]
 [Route("api/tags")]
 public class TagController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ICurrentUserService currentUser; // para acceder al contexto HTTP
 
-    public TagController(IMediator mediator)
+
+    public TagController(IMediator mediator, ICurrentUserService currentUser)
     {
         _mediator = mediator;
+        this.currentUser = currentUser;
     }
 
     // [HttpGet]
@@ -30,6 +34,21 @@ public class TagController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateTag(CreateTagCommand command)
     {
+
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
+
+        var user = await _mediator.Send(new GetUserByIdQuery(claimUserId.Value));
+        
+        if(user is null)
+        {
+            return Unauthorized();
+        }
+
+
         var result = await _mediator.Send(command);
 
         // return Ok(); // result
