@@ -1,4 +1,5 @@
 using Dominio.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
 public class TagsRepository : ITagsRepository
@@ -17,5 +18,14 @@ public class TagsRepository : ITagsRepository
         await _context.SaveChangesAsync();
 
         return tag;
+    }
+
+    public async Task<IReadOnlyList<Tags>> GetByUserAsync(Guid userId)
+    {
+        return await _context.Tags
+            // .Include(t => t.Tags)
+            //     .ThenInclude(tt => tt.Tag)
+            .Where(t => t.UserId == userId)
+            .ToListAsync();
     }
 }

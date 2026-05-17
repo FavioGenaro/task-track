@@ -18,19 +18,27 @@ public class TagController : ControllerBase
         this.currentUser = currentUser;
     }
 
-    // [HttpGet]
-    // public async Task<IActionResult> GetAll()
-    // {
-    //     // var userId = Guid.Parse(User.FindFirst("sub")!.Value);
-    //     var userId = Guid.Parse("9D71DFA7-BA01-43B5-A995-5B2B96A23EF5");
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var claimUserId = currentUser.UserId;
+        if(claimUserId is null)
+        {
+            return Unauthorized();
+        }
 
+        var user = await _mediator.Send(new GetUserByIdQuery(claimUserId.Value));
+        
+        if(user is null)
+        {
+            return Unauthorized();
+        }
+        var result = await _mediator.Send(
+            new GetTagsByUserQuery(claimUserId.Value));
 
-    //     var result = await _mediator.Send(
-    //         new GetTasksByUserQuery(userId));
-
-    //     // return Ok(); // result
-    //     return Ok(result);
-    // }
+        // return Ok(); // result
+        return Ok(result);
+    }
 
     [HttpPost]
     public async Task<IActionResult> CreateTag(CreateTagDto createTagDto)
