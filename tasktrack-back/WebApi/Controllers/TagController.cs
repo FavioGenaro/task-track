@@ -1,3 +1,4 @@
+using Aplicacion.DTOs.Input;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,7 @@ public class TagController : ControllerBase
     // }
 
     [HttpPost]
-    public async Task<IActionResult> CreateTag(CreateTagCommand command)
+    public async Task<IActionResult> CreateTag(CreateTagDto createTagDto)
     {
 
         var claimUserId = currentUser.UserId;
@@ -49,7 +50,12 @@ public class TagController : ControllerBase
         }
 
 
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(
+            new CreateTagCommand(
+                claimUserId.Value,
+                createTagDto.Name,
+                createTagDto.Color
+            ));
 
         // return Ok(); // result
         return Ok(result);

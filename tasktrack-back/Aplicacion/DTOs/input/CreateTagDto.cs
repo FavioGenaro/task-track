@@ -1,8 +1,7 @@
-namespace Aplicacion.DTOs;
+namespace Aplicacion.DTOs.Input;
 
-public class TagsDto
+public class CreateTagDto
 {
-    public Guid Id { get; set; }
     public required string Name { get; set; }
     public required string Color { get; set; }
 }

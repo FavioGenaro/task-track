@@ -12,6 +12,7 @@ public class User
     public DateTime UpdatedAt { get; set; }
 
     // public ICollection<Task> Tasks { get; set; }
+    public ICollection<Tags> Tags { get; set; } = new List<Tags>();
 
     public required UserPreferences UserPreferences { get; set; }
 }

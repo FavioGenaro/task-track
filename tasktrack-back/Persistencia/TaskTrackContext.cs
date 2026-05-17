@@ -36,6 +36,12 @@ namespace Persistencia
                 .WithMany() // User tiene muchas Tasks
                 .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<Tags>()
+                .HasOne(t => t.User) // Task tiene un User
+                .WithMany(u => u.Tags) // User tiene muchas Tags
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TaskHistory>()
                 .HasOne<Dominio.Entities.Task>()
