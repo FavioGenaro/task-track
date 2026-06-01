@@ -16,6 +16,7 @@ public class TaskProfile : Profile
                         .Select(tt => tt.Tag)
                         .Select(tag => new TagsDto
                         {
+                            Id = tag.Id == Guid.Empty ? Guid.Empty : tag.Id,
                             Name = tag.Name ?? string.Empty,
                             Color = tag.Color ?? string.Empty
                         }).ToList()));

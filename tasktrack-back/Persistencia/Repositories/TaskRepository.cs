@@ -18,9 +18,9 @@ public class TaskRepository : ITaskRepository
                 .ThenInclude(tt => tt.Tag)
             .FirstOrDefaultAsync(t =>
                 t.Id == taskId &&
-                t.UserId == userId // &&
-                // !t.IsArchived
-                );
+                t.UserId == userId &&
+                !t.IsArchived
+            );
     }
 
     public async Task<IReadOnlyList<Dominio.Entities.Task>> GetByUserAsync(Guid userId)
@@ -29,7 +29,7 @@ public class TaskRepository : ITaskRepository
             .Include(t => t.Tags)
                 .ThenInclude(tt => tt.Tag)
             .Where(t => t.UserId == userId 
-                // && !t.IsArchived
+                && !t.IsArchived
             )
             // .OrderBy(t => t.Position)
             .ToListAsync();
@@ -40,10 +40,10 @@ public class TaskRepository : ITaskRepository
     {
         var task = await _context.Tasks
             .FirstOrDefaultAsync(t =>
-                t.Id == taskId // &&
-                // t.UserId == userId &&
-                // !t.IsArchived
-                );
+                t.Id == taskId &&
+                t.UserId == userId &&
+                !t.IsArchived
+            );
         
         if(task is null) return false;
         
@@ -62,10 +62,10 @@ public class TaskRepository : ITaskRepository
     {
         var task = await _context.Tasks
             .FirstOrDefaultAsync(t =>
-                t.Id == taskId // &&
-                // t.UserId == userId &&
-                // !t.IsArchived
-                );
+                t.Id == taskId &&
+                t.UserId == userId &&
+                !t.IsArchived
+            );
         
         if(task is null) return false;
 
